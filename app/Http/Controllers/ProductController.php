@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\product;
+use App\Models\Product;
+use DB;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class productController extends Controller
+class ProductController extends Controller
 {
     public function index()
     {
-        return product::all();
+        // Fetch the products from the database
+        $products = DB::table('products')->get();
+
+        // Pass the products to the Inertia view
+        return Inertia::render('Store/Index', [
+            'products' => $products
+        ]);
     }
+
 
     public function store(Request $request)
     {
@@ -20,15 +29,15 @@ class productController extends Controller
             'p_price' => ['required', 'numeric'],
         ]);
 
-        return product::create($data);
+        return Product::create($data);
     }
 
-    public function show(product $product)
+    public function show(Product $product)
     {
         return $product;
     }
 
-    public function update(Request $request, product $product)
+    public function update(Request $request, Product $product)
     {
         $data = $request->validate([
             'p_img' => ['required'],
@@ -41,7 +50,7 @@ class productController extends Controller
         return $product;
     }
 
-    public function destroy(product $product)
+    public function destroy(Product $product)
     {
         $product->delete();
 
