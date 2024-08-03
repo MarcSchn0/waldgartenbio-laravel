@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use DB;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -27,6 +28,19 @@ class ProductSeeder extends Seeder
             ],
         ];
 
+        // Initialize Faker
+        $faker = Faker::create();
+
+        // Generate 30 additional products
+        for ($i = 0; $i < 30; $i++) {
+            $products[] = [
+                'p_img' => $faker->word,
+                'p_name' => $faker->word . ' Tomato',
+                'p_price' => $faker->randomFloat(2, 1, 100),
+            ];
+        }
+
+        // Insert all products into the database
         DB::table('products')->insert($products);
     }
 }

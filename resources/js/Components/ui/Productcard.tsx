@@ -1,37 +1,49 @@
+import React from 'react';
 import tomato from "@/Components/images/cherry_tomato.png";
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import {Button, Card, CardHeader, Image} from "@nextui-org/react";
+import {ShoppingCartIcon} from '@heroicons/react/24/outline';
+import {Button, Card, CardHeader, Image, Tooltip} from "@nextui-org/react";
 import {Product} from "@/types";
 
-export default function ProductCard(product: Product) {
+interface Props {
+    product: Product;
+}
 
-    const test = (n: number) => {
-        console.log(n);
+const ProductCard: React.FC<Props> = ({ product }) => {
+
+    const redirectToDetails = (id: string) => {
+        window.location.href = route('shop.show', {id: id});
     };
 
+
+
     return (
-        <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8">
-            <Card isPressable onPress={() => test(2)} className="col-span-12 sm:col-span-4 h-[400px]">
+        <div className="max-w-xs w-full">
+            <Card isPressable onPress={() => redirectToDetails(product.id.toString())} className="h-full group">
                 <CardHeader className="relative z-10 flex-col items-start">
                     <div className="relative w-full h-48">
-                        <Image
-                            src={tomato}
-                            alt=""
-                            className="inset-0 w-full h-full object-cover rounded-t-lg"
-                            loading="lazy"
+                        <Image isZoomed
+                               src={tomato}
+                               alt=""
+                               className="inset-0 w-full h-full object-cover rounded-t-lg"
+                               loading="lazy"
                         />
                     </div>
                 </CardHeader>
                 <div className="flex flex-col w-full flex-auto p-4">
-                    <h1 className="text-lg font-semibold text-slate-900 mb-2">
+                    <h1 className="text-lg font-semibold text-slate-900 mb-2 group-hover:underline">
                         {product.p_name}
                     </h1>
+                    <p>Kleine Info über die Pflanzen </p>
                     <p className="text-lg font-semibold text-slate-500 mb-2">{product.p_price} €</p>
-                    <Button onPress={() => test(1)} color="primary">
-                        <ShoppingCartIcon className="w-5 h-5"/>
-                    </Button>
+                    <Tooltip content="Zum Warenkorb hinzufügen">
+                        <Button onPress={() => redirectToDetails(product.id.toString())} color="primary">
+                            <ShoppingCartIcon className="w-5 h-5"/>
+                        </Button>
+                    </Tooltip>
                 </div>
             </Card>
         </div>
     );
 }
+
+export default ProductCard;

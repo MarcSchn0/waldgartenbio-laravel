@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\productController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('shop', ProductController::class)
-    ->only(['index', 'store']);
+    ->only(['index', 'store','show']);
+
+//Route::get('/shop/{id}', [ProductController::class, 'show'])->name('shop.show');
+
+Route::get('/shop/{id}', function ($id) {
+    $product = Product::findOrFail($id);
+    return Inertia::render('Store/Detail', [
+        'product' => $product
+    ]);
+})->name('shop.show');
 
 require __DIR__.'/auth.php';

@@ -15,12 +15,16 @@ const Index: React.FC<Props> = ({ products }) => {
         <UserLayout
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Shop</h2>}>
             <Head title="Shop"/>
-            <div className="mt-6 bg-white shadow-sm rounded-lg divide-y">
-                {products.map((product: Product) => (
-                    <ProductCard product={product}/>
 
-                ))}
+            <div className="flex justify-center items-center mt-10 ml-10 mr-10 bg-white shadow-sm rounded-lg">
+                <div className="grid grid-cols-3 gap-6">
+                    {products.map((product: Product) => (
+                        <ProductCard key={product.id} product={product}/>
+                    ))}
+                </div>
             </div>
+
+
         </UserLayout>
     );
 }
