@@ -30,11 +30,10 @@ class ProductController extends Controller
         return Product::create($data);
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
-
         return Inertia::render('Store/Detail', [
-            'product' => $product
+            'product' => Product::find($id),
         ]);
     }
 

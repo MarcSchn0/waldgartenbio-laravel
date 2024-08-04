@@ -26,16 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('shop', ProductController::class)
-    ->only(['index', 'store','show']);
+/*Route::resource('shop', ProductController::class)
+    ->only(['index', 'store','show']);*/
 
-//Route::get('/shop/{id}', [ProductController::class, 'show'])->name('shop.show');
+Route::get('shop', [ProductController::class, 'index'])->name('shop.index');
 
-Route::get('/shop/{id}', function ($id) {
-    $product = Product::findOrFail($id);
-    return Inertia::render('Store/Detail', [
-        'product' => $product
-    ]);
-})->name('shop.show');
+Route::get('/shop/{id}', [ProductController::class, 'show'])->name('shop.show');
 
 require __DIR__.'/auth.php';
