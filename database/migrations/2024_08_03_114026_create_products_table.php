@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('p_img');
             $table->string('p_name');
             $table->decimal('p_price');
+            $table->text('p_description');
         });
     }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import tomato from "@/Components/images/cherry_tomato.png";
 import {ShoppingCartIcon} from '@heroicons/react/24/outline';
 import {Button, Card, CardHeader, Image, Tooltip} from "@nextui-org/react";
 import {Product} from "@/types";
@@ -22,8 +21,8 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                 <CardHeader className="relative z-10 flex-col items-start">
                     <div className="relative w-full h-48">
                         <Image isZoomed
-                               src={tomato}
-                               alt=""
+                               src={"http://[::1]:5173/resources/js/Components/images/"+product.p_img}
+                               alt={product.p_img}
                                className="inset-0 w-full h-full object-cover rounded-t-lg"
                                loading="lazy"
                         />
@@ -33,7 +32,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
                     <h1 className="text-lg font-semibold text-slate-900 mb-2 group-hover:underline">
                         {product.p_name}
                     </h1>
-                    <p>Kleine Info über die Pflanzen </p>
+                    <p>{product.p_description} </p>
                     <p className="text-lg font-semibold text-slate-500 mb-2">{product.p_price} €</p>
                     <Tooltip content="Zum Warenkorb hinzufügen">
                         <Button onPress={() => redirectToDetails(product.id.toString())} color="primary">

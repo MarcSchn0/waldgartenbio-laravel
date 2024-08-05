@@ -25,6 +25,7 @@ class ProductController extends Controller
             'p_img' => ['required'],
             'p_name' => ['required'],
             'p_price' => ['required', 'numeric'],
+            'p_description' => ['required'],
         ]);
 
         return Product::create($data);
@@ -43,6 +44,7 @@ class ProductController extends Controller
             'p_img' => ['required'],
             'p_name' => ['required'],
             'p_price' => ['required', 'numeric'],
+            'p_description' => ['required'],
         ]);
 
         $product->update($data);
