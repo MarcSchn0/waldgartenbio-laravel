@@ -16,29 +16,25 @@ export function ShopItem({ product }: Props) {
     };
 
     return (
-        <div className="w-72 max-w-md bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full">
             <div className="relative">
-                <img
-                    src={"http://[::1]:5173/resources/js/Components/images/" + product.p_img}
-                    alt="Product Image"
-                    className="w-full h-48 object-cover p-3 rounded-2xl"
-                    style={{ objectFit: "cover" }}
+                <img draggable={false}
+                     src={"http://[::1]:5173/resources/js/Components/images/" + product.p_img}
+                     alt="Product Image"
+                     className="w-full h-full rounded-2xl object-contain"
                 />
+
             </div>
             <div className="p-6 flex flex-col flex-grow">
-                <div className="mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-2xl font-bold">{product.p_name}</h3>
-                    </div>
-                    <div className="flex items-center justify-between mb-4">
-                        <span className="text-2xl font-bold text-black">{product.p_type}</span>
-                    </div>
+                <div className="flex-grow">
+                    <h3 className="text-2xl font-bold mb-4">{product.p_name}</h3>
+                    <span className="text-2xl font-bold text-black mb-4">{product.p_type}</span>
                     <p className="text-muted-foreground mb-6">
                         {product.p_description}
                     </p>
                 </div>
                 <div className="flex flex-col mt-auto">
-                    <Input min={1} className="mb-3" type="number" placeholder="Menge:" onChange={event => setFieldValue(event.target.value)} />
+                    <Input id={product.id.toString()} min={1} className="mb-3" type="number" placeholder="Menge:" onChange={event => setFieldValue(event.target.value)} />
                     <Button onClick={() => { redirectToDetails(product.id.toString()); }} size="sm">
                         <ShoppingCartIcon className="w-5 h-5" /> Zum Warenkorb hinzufügen
                     </Button>
@@ -47,3 +43,5 @@ export function ShopItem({ product }: Props) {
         </div>
     );
 }
+
+
