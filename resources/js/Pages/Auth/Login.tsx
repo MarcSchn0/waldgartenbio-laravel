@@ -3,9 +3,10 @@ import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import {Button} from "@/Components/ui/button";
+
 
 export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -47,7 +48,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="Passwort" />
 
                     <TextInput
                         id="password"
@@ -69,23 +70,33 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Angemeldet bleiben</span>
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center mt-10 justify-between">
+                    <Link
+                        href={route('register')}
+                        className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    >
+                        Hier registrieren
+                    </Link>
+
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                         >
-                            Forgot your password?
+                            Passwort vergessen?
                         </Link>
                     )}
+                </div>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+
+                <div className="flex items-center justify-end mt-4">
+                    <Button className="ms-4" disabled={processing}>
+                        Anmelden
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

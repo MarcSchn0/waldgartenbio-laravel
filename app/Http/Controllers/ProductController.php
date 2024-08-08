@@ -24,8 +24,9 @@ class ProductController extends Controller
         $data = $request->validate([
             'p_img' => ['required'],
             'p_name' => ['required'],
-            'p_price' => ['required', 'numeric'],
             'p_description' => ['required'],
+            'p_color' => ['required'],
+            'p_type' => ['required'],
         ]);
 
         return Product::create($data);
@@ -43,8 +44,9 @@ class ProductController extends Controller
         $data = $request->validate([
             'p_img' => ['required'],
             'p_name' => ['required'],
-            'p_price' => ['required', 'numeric'],
             'p_description' => ['required'],
+            'p_color' => ['required'],
+            'p_type' => ['required'],
         ]);
 
         $product->update($data);

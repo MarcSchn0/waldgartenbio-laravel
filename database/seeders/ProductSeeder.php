@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ProductType;
 use DB;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -10,26 +11,7 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        $products = [
-            [
-                'p_img' => 'cherry_tomato.png',
-                'p_name' => 'Cherry Tomato',
-                'p_price' => 10.90,
-                'p_description' => 'Eine kleine Description',
-            ],
-            [
-                'p_img' => 'cherry_tomato.png',
-                'p_name' => 'Big Tomato',
-                'p_price' => 20.00,
-                'p_description' => 'Eine große Description die sehr wichtig ist',
-            ],
-            [
-                'p_img' => 'cherry_tomato.png',
-                'p_name' => 'Orange Tomato',
-                'p_price' => 30.00,
-                'p_description' => 'Jung gesund Orange',
-            ],
-        ];
+        $products = [];
 
         // Initialize Faker
         $faker = Faker::create();
@@ -39,8 +21,9 @@ class ProductSeeder extends Seeder
             $products[] = [
                 'p_img' => 'cherry_tomato.png',
                 'p_name' => $faker->word . ' Tomato',
-                'p_price' => $faker->randomFloat(2, 1, 100),
                 'p_description' => $faker->text,
+                'p_color' => $faker->word,
+                'p_type' => $faker->randomElement(ProductType::cases())->value,
             ];
         }
 

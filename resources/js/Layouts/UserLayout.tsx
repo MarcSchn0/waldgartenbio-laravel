@@ -1,10 +1,12 @@
-import { useState, PropsWithChildren, ReactNode } from 'react';
+import {useState, PropsWithChildren, ReactNode} from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import {Link} from '@inertiajs/react';
+import Dropdown from "@/Components/Dropdown";
+import {Button} from "@/Components/ui/button";
 
-export default function UserLayout({ header, children }: PropsWithChildren<{ header?: ReactNode }>) {
+export default function UserLayout({header, children}: PropsWithChildren<{ header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -15,7 +17,8 @@ export default function UserLayout({ header, children }: PropsWithChildren<{ hea
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <ApplicationLogo
+                                        className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                                 </Link>
                             </div>
 
@@ -26,6 +29,21 @@ export default function UserLayout({ header, children }: PropsWithChildren<{ hea
                                 <NavLink href={route('shop.index')} active={route().current('shop.index')}>
                                     Shop
                                 </NavLink>
+                            </div>
+                        </div>
+
+                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                            <div className="ms-3 relative">
+                                <div>
+                                        <span className="inline-flex rounded-md">
+                                            <Button
+                                                onClick={() => window.location.href = route('login')}
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                            >
+                                                Login
+                                            </Button>
+                                        </span>
+                                </div>
                             </div>
                         </div>
 
